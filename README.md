@@ -1,8 +1,7 @@
 # SOA-Competition
-
 # EDFIP Project - Premium Calculation
 
-This repository contains the code used for calculating premiums as part of the EDFIP project.
+This repository contains the code used for calculating insurance premiums as part of the EDFIP project.
 
 ## Project Status
 
@@ -10,37 +9,46 @@ The project has been completed, and this code was used for the initial submissio
 
 ## Description
 
-- The code attempts to calculate insurance premiums based on dam failure probabilities, hazard levels, and housing data across different regions.
-- It reads dam data from a CSV file, filters relevant entries, adjusts probabilities for a one-year period, and calculates expected losses.
-- Premiums are calculated for three regions ("Flumevale," "Lyndrassia," and "Navaldia"), considering different hazard multipliers, house values, and participation rates.
-- The code applies inflation adjustment for premium collection over multiple years and uses scaling to match target inflows.
+- The code attempts to calculate insurance premiums for Earth-type dams based on dam failure probabilities, hazard levels, house values, and regional factors.
+- The premium calculation incorporates adjustments for inflation, participation rates, hazard multipliers, and multi-year coverage periods.
+- It produces premium amounts broken down by region and house value categories.
 
 ## Code Explanation
 
-- **Data Input:** Loads a CSV file containing dam data, filters for entries related to "Earth" dams, and cleans missing values.
-- **Probability Adjustment:** Adjusts the failure probability for a 1-year time frame based on the original 10-year probability.
-- **Hazard Multipliers:** Applies risk multipliers based on hazard levels ("Low," "Significant," "High," etc.).
-- **Regional Data:** Uses predefined housing counts and failure probabilities for each region.
-- **Participation Rates:** Incorporates participation factors both by region and by house value category to model insurance uptake.
-- **Premium Calculation:**  
-  - Calculates expected loss as a basis for premium setting.  
-  - Computes region-specific premiums scaled by hazard proportions and failure probabilities.  
-  - Calculates premiums per house value category within each region, factoring in weights for house values.  
-  - Adjusts for inflation over the coverage period.  
-  - Applies final scaling to ensure total premiums collected match the target inflow.
-- **Output:** Prints total premiums per region, premiums by house value category, and average annual premium per insured house.
+- **Data Input and Filtering:**  
+  Reads data from a CSV file and filters it for "Earth" type dams. It also handles missing values in loss amounts.
+
+- **Probability Adjustment:**  
+  Converts the 10-year failure probability to a 1-year period probability for calculations.
+
+- **Hazard Multipliers:**  
+  Applies multipliers to account for hazard levels classified as Low, Significant, High, or Undetermined.
+
+- **Regional Data:**  
+  Defines the number of houses per region and house value categories, participation rates, and dam failure probabilities.
+
+- **Inflation Adjustment:**  
+  Uses a function `adjust_for_inflation()` to adjust premiums for expected inflation over the coverage period.
+
+- **Premium Calculation (`calculate_premium(years)`):**  
+  Calculates expected losses, adjusts for insured percentage, and computes premiums per region and house category.  
+  It factors in participation rates, hazard weights, and applies a scaling mechanism to align collected premiums with target inflows.
+
+- **Output:**  
+  Prints total premiums collected by region and by house value category, along with average annual premiums per insured house.
 
 ## Disclaimer
 
-This code was developed as part of a student project and may contain logical errors or assumptions that need revision. It is provided for reference and learning purposes. The premium calculation logic will be revisited in future versions.
+This implementation is an early version and **may contain logical errors** in the premium calculation method. The code will be revisited and improved based on further review and feedback.
 
 ## How to Use
 
-1. Clone the repository.
-2. Ensure the input CSV file path is correct or replace it with your own data.
-3. Run the main Python script to see premium calculations.
-4. Modify parameters or extend the script as needed.
+- Clone this repository.
+- Ensure the CSV input file `data/data.csv` is in place with the expected columns.
+- Run the main script to perform premium calculations and display results.
+- Modify parameters such as coverage years or input data as needed.
 
 ---
 
 Thank you for reviewing this work.
+
