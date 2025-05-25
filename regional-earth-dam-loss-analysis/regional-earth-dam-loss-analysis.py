@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 
 # File path
-input_file = r"C:\Pyhton\PyCharm Community Edition 2024.2.1\Files\WEbScraping\SOA Competition\data\srcsc-2025-dam-data-for-students.csv"
+input_file = r"data/data.csv"
 
 # Read data
 df = pd.read_csv(input_file)
