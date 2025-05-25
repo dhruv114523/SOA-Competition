@@ -95,15 +95,3 @@ python script_name.py
 ```
 
 ---
-
-## Disclaimer
-
-These models were developed as part of a student competition. While functional, they are **conceptual** and may contain **simplifications or logic issues**. They are not production-grade and should not be used for real-world pricing or risk management without expert review.
-
----
-
-## License
-
-This repository is intended for educational and analytical use. You are welcome to explore, reuse, and adapt the content with attribution.
-
----
