@@ -21,14 +21,10 @@ Each component is self-contained and has its own `README.md` with detailed docum
 SOA-Competition/
 │
 ├── earth-dam-loss-analysis/
-│   ├── data/
-│   │   └── data.csv
 │   ├── earth_dam_loss_analysis.py
 │   └── README.md        # Loss analysis explanation
 │
 ├── premium-calculation/
-│   ├── data/
-│   │   └── data.csv
 │   ├── premium_model.py
 │   └── README.md        # Premium pricing model explanation
 │
