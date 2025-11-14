@@ -36,18 +36,6 @@ The project has been completed, and this code was used for the initial submissio
 
 - **Output:**  
   Prints total premiums collected by region and by house value category, along with average annual premiums per insured house.
-
-## Disclaimer
-
-This implementation is an early version and **may contain logical errors** in the premium calculation method. The code will be revisited and improved based on further review and feedback.
-
-## How to Use
-
-- Clone this repository.
-- Ensure the CSV input file `data/data.csv` is in place with the expected columns.
-- Run the main script to perform premium calculations and display results.
-- Modify parameters such as coverage years or input data as needed.
-
 ---
 
 Thank you for reviewing this work.
