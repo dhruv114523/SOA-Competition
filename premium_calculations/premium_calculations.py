@@ -3,15 +3,15 @@ import numpy as np
 import math
 
 # Read CSV file
-input_file = r'data/data.csv'
+input_file = r'C:\Pyhton\PyCharm Community Edition 2024.2.1\Files\WEbScraping\SOA Competition\data\srcsc-2025-dam-data-for-students.csv'
 df = pd.read_csv(input_file)
 
 # Filter for "Earth" type
-df = df[df["Primary Type"] == "Earth"] #Insurance Policy only for Earthen Dam Failures
+df = df[df["Primary Type"] == "Earth"]
 df = df[df["Distance to Nearest City (km)"] != ""]
 
 # Adjust probability of failure for a 1-year period
-df["Probability of Failure"] = 1 - (1 - df["Probability of Failure"]) ** (1 / 10) # Converting to 1 year period
+df["Probability of Failure"] = 1 - (1 - df["Probability of Failure"]) ** (1 / 10)
 
 # Replace missing values for loss amounts
 df["Loss given failure - liab (Qm)"] = df["Loss given failure - liab (Qm)"].fillna(0)
@@ -72,6 +72,13 @@ def calculate_premium(years):
     base_target_inflow = expected_loss * 0.5 * 1e6
     target_inflow = adjust_for_inflation(base_target_inflow, years)
 
+    # Compute total risk exposure based on hazard proportions
+    total_risk_exposure = sum(
+        sum(houses_per_region[region]) * failure_probabilities[region] *
+        sum(hazard_proportions.loc[region] * [hazard_multipliers.get(h, 1.2) for h in hazard_proportions.columns])
+        for region in houses_per_region if region in hazard_proportions.index
+    )
+
     region_premiums = {}
     category_premiums = {region: [] for region in houses_per_region}
     avg_premium_per_house = {}
@@ -83,6 +90,12 @@ def calculate_premium(years):
     for region, houses in houses_per_region.items():
         participation_factor = region_participation[region]
         cumulative_risk = 1 - np.exp(-years * failure_probabilities[region])
+
+        # Adjust premium for hazard proportions
+        hazard_weighted_premium = sum(
+            hazard_proportions.loc[region][hazard] * hazard_multipliers.get(hazard, 1.2)
+            for hazard in hazard_proportions.columns
+        ) if region in hazard_proportions.index else 1.0
 
         # Raw regional premium before final scaling
         region_premium = (sum(houses) * failure_probabilities[region] / total_risk_exposure)
