@@ -1,17 +1,6 @@
-# SOA Competition – EDFIP Project Repository
+# SOA Competition - EDFIP Project Repository
 
-This repository contains analysis and modeling work submitted for the **EDFIP Project** in the **2025 SOA Competition**. It includes two related but distinct components:
-
-1. **Loss Analysis for Earth-Type Dams**
-2. **Premium Calculation Model for Insurance Pricing**
-
-Each component is self-contained and has its own `README.md` with detailed documentation. This file provides a high-level overview of the repository structure and purpose.
-
----
-
-## Disclaimer
-
-2 more scripts have been added, this README and their respective READMEs will be updated shortly
+This repository contains analysis and modeling work submitted for the **EDFIP Project** in the **2025 SOA Competition**. It includes four main components covering exploratory data analysis, inflation forecasting, loss analysis, and premium calculation.
 
 ---
 
@@ -20,20 +9,58 @@ Each component is self-contained and has its own `README.md` with detailed docum
 ```
 SOA-Competition/
 │
+├── EDA/
+│   ├── main.py
+│   └── README.md              # Exploratory data analysis documentation
+│
+├── inflation_forecasting/
+│   ├── inflation_forecasting.R
+│   └── README.md              # Inflation forecasting model documentation
+│
 ├── earth-dam-loss-analysis/
 │   ├── earth_dam_loss_analysis.py
-│   └── README.md        # Loss analysis explanation
+│   └── README.md              # Loss analysis explanation
 │
-├── premium-calculation/
-│   ├── premium_model.py
-│   └── README.md        # Premium pricing model explanation
+├── premium_calculations/
+│   ├── premium_calculations.py
+│   └── README.md              # Premium pricing model explanation
 │
-└── README.md            # This parent overview file
+└── README.md                  # This parent overview file
 ```
 
 ---
 
-## 1. Earth Dam Loss Analysis
+## 1. Exploratory Data Analysis (EDA)
+
+The EDA module performs comprehensive data exploration and visualization on dam failure and economic datasets. It includes:
+
+- Data loading and preprocessing utilities
+- Statistical summaries and distribution analysis
+- Correlation analysis between variables
+- Visualization functions for loss patterns and risk factors
+- Missing data analysis
+
+For full documentation, see:  
+[`EDA/README.md`](./EDA/README.md)
+
+---
+
+## 2. Inflation Forecasting
+
+This R script forecasts inflation rates using time series analysis with ARIMAX models. It:
+
+- Loads historical economic data including inflation, GDP growth, and unemployment
+- Performs stationarity tests (ADF, KPSS)
+- Fits ARIMAX models with economic predictors
+- Forecasts 21 years of inflation rates
+- Generates diagnostic plots and forecast visualizations
+
+For full documentation, see:  
+[`inflation_forecasting/README.md`](./inflation_forecasting/README.md)
+
+---
+
+## 3. Earth Dam Loss Analysis
 
 This script processes dam failure and financial loss data, filtered for **Earth-type dams**, and:
 
@@ -52,48 +79,87 @@ For full documentation, see:
 
 ---
 
-## 2. Premium Calculation Model
+## 4. Premium Calculation Model
 
 This module estimates insurance premiums for properties affected by dam-related risk, incorporating:
 
 - Region-specific failure probabilities and hazard classifications
 - House value categories and participation rates
 - Inflation adjustments over multi-year coverage terms
+- Detailed formulas for probability conversion, expected loss, and premium allocation
 - A scaling mechanism to align collected premiums with expected inflows
 
-It prints detailed premium breakdowns by region and property category.
-
-For full documentation, see:  
-[`premium-calculation/README.md`](./premium-calculation/README.md)
+For full documentation including mathematical formulas, see:  
+[`premium_calculations/README.md`](./premium_calculations/README.md)
 
 ---
 
 ## Requirements
 
-Both components require:
+### Python Components (EDA, Loss Analysis, Premium Calculation)
 
 - Python 3.x
 - pandas
 - numpy
 - matplotlib
+- seaborn (for EDA)
 
-Install dependencies with:
+Install Python dependencies with:
 
 ```bash
-pip install pandas numpy matplotlib
+pip install pandas numpy matplotlib seaborn
+```
+
+### R Components (Inflation Forecasting)
+
+- R 4.x or higher
+- Required packages: forecast, tseries, ggplot2, readr, scales
+
+Install R dependencies with:
+
+```r
+install.packages(c("forecast", "tseries", "ggplot2", "readr", "scales"))
 ```
 
 ---
 
 ## Usage
 
-Each module is self-contained. To run either:
+Each module is self-contained with its own data requirements and run instructions.
 
-1. Place `data.csv` in the corresponding `data/` folder.
-2. Run the relevant Python script using:
+### Python Scripts
 
-```bash
-python script_name.py
+```powershell
+# Run EDA
+cd EDA
+python main.py
+
+# Run Premium Calculations
+cd premium_calculations
+python premium_calculations.py
+
+# Run Loss Analysis
+cd earth-dam-loss-analysis
+python earth_dam_loss_analysis.py
 ```
+
+### R Scripts
+
+```powershell
+# Run Inflation Forecasting
+cd inflation_forecasting
+Rscript inflation_forecasting.R
+```
+
+Refer to individual component READMEs for specific data file requirements and expected outputs.
+
+---
+
+## Data Files
+
+- `EDA/data/` - Input datasets for exploratory analysis
+- `inflation_forecasting/data/economic_data.csv` - Historical economic indicators
+- `premium_calculations/data/data.csv` - Dam failure and loss data
+- `earth-dam-loss-analysis/data/data.csv` - Dam loss dataset
 
 ---
