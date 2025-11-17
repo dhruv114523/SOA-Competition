@@ -90,7 +90,7 @@ Below are the formulas implemented (symbolic form), with brief explanations of e
   region_premium_raw = region_raw_share * cumulative_risk * participation_factor * hazard_weighted_premium
 
   Notes:
-  - `total_risk_exposure` and `hazard_weighted_premium` are referenced in the code but not computed within this file. They act as normalizing or scaling constants. If not defined externally, the script will raise a NameError. In a complete workflow, `total_risk_exposure` should equal the sum across regions of `total_houses_region * lambda_region` or a similar aggregate exposure measure, and `hazard_weighted_premium` should summarize hazard multiplier effects across regions using `hazard_proportions` and `hazard_multipliers`.
+  - `total_risk_exposure` and `hazard_weighted_premium` are referenced in the code but not computed within this file. They act as normalizing or scaling constants.
 
 6) Category-level premium allocation within a region:
 
